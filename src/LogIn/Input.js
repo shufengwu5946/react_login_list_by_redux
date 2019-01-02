@@ -17,28 +17,26 @@ const styles = theme => ({
 
 class Input extends React.Component {
 
-  handleUserChange(e) {
-    this.props.handleChange({ userName: e.target.value });
-  }
+  // handleUserChange() {
+  //   this.props.handleChange({ userName: e.target.value });
+  // }
 
-  handlePassChange(e) {
-    this.props.handleChange({ password: e.target.value });
-  }
+  // handlePassChange() {
+  //   this.props.handleChange({ password: e.target.value });
+  // }
 
   render() {
     const { classes } = this.props;
-    const { userName, password } = this.props;
     return (
       <form className={classes.container} noValidate autoComplete="off">
-        
+
         <TextField
           id="standard-with-placeholder"
           label="User Name*"
           placeholder="User Name*"
           className={classes.textField}
           margin="normal"
-          value={userName}
-          onChange={(e) => this.handleUserChange(e)} />
+          onChange={(e) => this.props.setUserName(e.target.value)} />
         <TextField
           id="standard-password-input"
           label="Password*"
@@ -46,8 +44,7 @@ class Input extends React.Component {
           type="password*"
           autoComplete="current-password"
           margin="normal"
-          value={password}
-          onChange={(e) => this.handlePassChange(e)}
+          onChange={(e) => this.props.setPassword(e.target.value)}
         />
       </form>
     );

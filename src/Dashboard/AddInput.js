@@ -26,16 +26,16 @@ class AddInput extends React.Component {
         super(props);
         this.state = {name:""}
     }
-    handleClick(){
-        this.props.handleAdd(this.state.name);
-    }
+    // handleClick(){
+    //     this.props.handleAdd(this.state.name);
+    // }
 
     handlechange(e){
         this.setState({name:e.target.value});
     }
 
     render() {
-        const { classes } = this.props;
+        const { classes,addTodo } = this.props;
         return (
             <div className={classes.root}>
                 <TextField
@@ -50,7 +50,7 @@ class AddInput extends React.Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                    onClick={e => this.handleClick(e)}>
+                    onClick={() =>addTodo(this.state.name)}>
                     新增
                 </Button>
             </div>

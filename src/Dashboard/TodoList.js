@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from '@material-ui/core/List';
-import TodoListItem from './ListItem';
+import TodoListItem from '../containers/TodoListItem';
 
 const styles = theme => ({
     root: {
@@ -20,25 +20,25 @@ const styles = theme => ({
 
 class TodoList extends React.Component {
 
-    constructor(props){
-        super(props);
-        this.handleDelete = this.handleDelete.bind(this);
-    }
-    handleDelete(id){
+    // constructor(props){
+    //     super(props);
+    //     this.handleDelete = this.handleDelete.bind(this);
+    // }
+    // handleDelete(id){
         
-        this.props.handleDelete(id);
-    }
+    //     this.props.handleDelete(id);
+    // }
 
     render() {
-        const { classes, list } = this.props;
+        const { classes} = this.props;
         return (
             <div className={classes.demo}>
                 <List dense={false}>
                     {
-                        list.map((value => {
+                        this.props.todos.map((value => {
                             if (!value.completed) {
                                 return (
-                                    <TodoListItem key = {value.id} data = {value} handleDelete = {this.handleDelete}/>
+                                    <TodoListItem key = {value.id} data = {value}/>
                                 )
                             }else{
                                 return null;

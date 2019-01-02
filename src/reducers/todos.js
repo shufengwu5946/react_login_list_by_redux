@@ -6,14 +6,16 @@ import {
 export const todos = (state = [], action) => {
     switch (action.type) {
         case 'ADD_TODO':
-            return [
+            const s = [
                 ...state,
                 {
-                    id: getMaxId(state) + 1,
+                    id: (getMaxId(state) + 1),
                     text: action.text,
                     completed: false
                 }
             ];
+            console.log(s);
+            return s;
         case 'DELETE_TODO':
             return state.map(value =>
                 (value.id === action.id) ? {...value, completed: true} : value

@@ -1,7 +1,8 @@
-export const addTodo = (id,text) => {
+import {fetchLogin} from '../utils';
+import getList from '../other/get-list';
+export const addTodo = (text) => {
     return {
         type: 'ADD_TODO',
-        id,
         text
     }
 }
@@ -20,32 +21,75 @@ export const loadTodo = (todos) => {
     }
 }
 
-export const logOutSuccess = (loginInfo)=>{
+export const logOutSuccess = () => {
     return {
-        type: 'LOG_OUT_SUCCESS',
-        loginInfo
+        type: 'LOG_OUT_SUCCESS'
     }
 }
 
-export const logOutFail = (loginInfo) =>{
-    return {
-        type: 'LOG_OUT_FAIL',
-        loginInfo
-    }
-} 
-
-export const logInSuccess = (loginInfo,userName,userId) =>{
+export const logInSuccess = (userName, userId) => {
     return {
         type: 'LOG_IN_SUCCESS',
-        loginInfo,
         userName,
         userId
     }
-} 
+}
 
-export const logInFail = (loginInfo) =>{
+export const logInStart = () => {
+    return {
+        type: 'LOG_IN'
+    }
+}
+
+export const logInFail = (loginInfo) => {
     return {
         type: 'LOG_IN_FAIL',
         loginInfo
     }
-} 
+}
+
+export const setUserName = (userName) => {
+    return {
+        type: 'SET_USER_NAME',
+        userName
+    }
+
+}
+export const setPassword = (password) => {
+    return {
+        type: 'SET_PASSWORD',
+        password
+    }
+}
+
+export const setLoginLoading = (loading) => {
+    return {
+        type: 'SET_LOGIN_LOADING',
+        loading
+    }
+}
+
+export const login = () => {
+    return function(dispatch,getState){
+        dispatch(logInStart());
+        return fetchLogin(getState().userName, getState().password).then(
+            value => {
+                dispatch(logInSuccess(getState().userName,value.userId))
+            },
+            error => {
+                dispatch(logInFail(error.error ? error.error : "Uh oh,some error happened!"));
+            }
+        );
+    }
+}
+
+export const loadTodos = () => {
+    return function(dispatch,getState){
+        return getList(getState().userId, (data) => {
+            const todos = data;
+            dispatch(loadTodo(todos));
+        },(error)=>{
+            console.log('error')
+        });
+    }
+}

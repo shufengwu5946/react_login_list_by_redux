@@ -26,13 +26,13 @@ const styles = theme => ({
 
 
 
-class TodoListItem extends React.Component {
+class TListItem extends React.Component {
 
-    click(){
+    // click(){
         
         
-        this.props.handleDelete(this.props.data.id);
-    }
+    //     this.props.handleDelete(this.props.data.id);
+    // }
 
     render() {
         const { classes, data } = this.props;
@@ -48,7 +48,7 @@ class TodoListItem extends React.Component {
                         primary={data.title}
                     />
                     <ListItemSecondaryAction>
-                        <IconButton aria-label="Delete" onClick = {()=>this.click()}>
+                        <IconButton aria-label="Delete" onClick = {()=>this.props.deleteTodo(this.props.data.id)}>
                             <DeleteIcon />
                         </IconButton>
                     </ListItemSecondaryAction>
@@ -60,8 +60,8 @@ class TodoListItem extends React.Component {
     }
 }
 
-TodoListItem.propTypes = {
+TListItem.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TodoListItem);
+export default withStyles(styles)(TListItem);
