@@ -5,9 +5,7 @@ import TitleBar from '../Dashboard/TitleBar';
 const mapStateToProps = state => {
     return {
         loading: state.loading,
-        userName:state.userName,
-        userId:state.userId,
-        login:state.login
+        userName:state.userName
     }
 }
 

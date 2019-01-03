@@ -3,15 +3,15 @@ import AddInput from '../Dashboard/AddInput';
 import {addTodo} from '../actions/index'
 
 const mapStateToProps = state => {
-    return {}
+    return {userId:state.userId}
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        addTodo: text => {
+        addTodo: (text,userId) => {
             console.log(text);
             
-            dispatch(addTodo(text));
+            dispatch(addTodo(text,userId));
         }
     }
 }

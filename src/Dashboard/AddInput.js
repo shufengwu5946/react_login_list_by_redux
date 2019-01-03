@@ -50,7 +50,7 @@ class AddInput extends React.Component {
                     variant="contained"
                     color="primary"
                     className={classes.button}
-                    onClick={() =>addTodo(this.state.name)}>
+                    onClick={() =>addTodo(this.state.name,this.props.userId)}>
                     新增
                 </Button>
             </div>

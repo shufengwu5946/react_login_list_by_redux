@@ -1,9 +1,10 @@
 import {fetchLogin} from '../utils';
 import getList from '../other/get-list';
-export const addTodo = (text) => {
+export const addTodo = (title,userId) => {
     return {
         type: 'ADD_TODO',
-        text
+        title,
+        userId
     }
 }
 

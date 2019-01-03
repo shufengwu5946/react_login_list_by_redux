@@ -33,10 +33,8 @@ class TitleBar extends React.Component {
                     <Typography variant="h6" color="inherit" className={classes.grow}>
                         {`Hello ${this.props.userName}`}
                     </Typography>
-                    <Button color="inherit" onClick={() => this.props.logOutSuccess} disabled={this.props.loading}>LogOut</Button>
+                    <Button color="inherit" onClick={() => this.props.logOutSuccess()} disabled={this.props.loading}>LogOut</Button>
                 </Toolbar>
-
-
             </AppBar>
         )
     }
