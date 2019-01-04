@@ -7,7 +7,7 @@ export default function getList(userId, func,funcError) {
         .then(data => {
             func(data);
         })
-        .then(error => {
+        .catch(error => {
             funcError(error);
         })
 }
