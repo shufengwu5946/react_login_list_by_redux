@@ -5,6 +5,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from 'react-redux'
+import { logOutSuccess } from '../actions/index'
 
 const styles = theme => ({
     root: {
@@ -20,10 +22,6 @@ const styles = theme => ({
 });
 
 class TitleBar extends React.Component {
-
-    // handleLoginChange(){
-    //     this.props.handleLoginChange({login:false});
-    // }
 
     render() {
         const { classes } = this.props;
@@ -44,4 +42,19 @@ TitleBar.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TitleBar);
+const mapStateToProps = state => {
+    return {
+        loading: state.loading,
+        userName:state.userName
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        logOutSuccess: () => {
+            dispatch(logOutSuccess());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TitleBar));

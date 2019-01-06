@@ -6,6 +6,8 @@ export const loginInfo = (state = '', action) => {
             return '';
         case 'LOG_IN_FAIL':
             return action.loginInfo;
+        case 'LOG_IN':
+            return "";
         default:
             return state;
     }
@@ -31,6 +33,8 @@ export const userName = (state = '', action) => {
             return action.userName;
         case 'SET_USER_NAME':
             return action.userName;
+        case 'LOG_OUT_SUCCESS':
+            return "";
         default:
             return state;
     }
@@ -49,6 +53,8 @@ export const password = (state = '', action) => {
     switch (action.type) {
         case 'SET_PASSWORD':
             return action.password;
+        case 'LOG_OUT_SUCCESS':
+            return "";
         default:
             return state;
     }
@@ -68,7 +74,3 @@ export const loading = (state = false, action) => {
             return state;
     }
 }
-
-
-
-

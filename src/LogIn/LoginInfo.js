@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import "../css/index.css";
 
 const styles = theme => ({
   textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: "100%"
+    paddingLeft: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    width:"100%",
+    boxSizing:"border-box"
   }
 });
 

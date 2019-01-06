@@ -2,9 +2,11 @@ import React from "react";
 import Typography from '@material-ui/core/Typography';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
-import TodoAddInput from "../containers/TodoAddInput";
-import TodoTitleBar from "../containers/TodoTitleBar";
-import TodoList from "../containers/TodoList";
+import AddInput from "./AddInput";
+import TitleBar from "./TitleBar";
+import TodoList from "./TodoList";
+import { connect } from 'react-redux'
+import { loadTodos} from '../actions/index'
 
 const styles = {
     root: {
@@ -27,11 +29,11 @@ class Dashboard extends React.Component {
         return (
 
             <div className={classes.root}>
-                <TodoTitleBar />
+                <TitleBar />
                 <Typography className={classes.title} variant="h4" gutterBottom>
                     Todo Form
                 </Typography>
-                <TodoAddInput />
+                <AddInput />
                 <Typography className={classes.title} variant="h4" gutterBottom>
                     Todo List
                 </Typography>
@@ -44,9 +46,22 @@ class Dashboard extends React.Component {
     }
 }
 
-// export default Dashboard;
 Dashboard.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Dashboard);
+const mapStateToProps = state => {
+    return {
+        todos:state.todos
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loadTodos: () => {
+            dispatch(loadTodos());
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Dashboard));

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
-import TodoLogin from './containers/TodoLogin'
-import TodoDashboard from './containers/TodoDashboard';
+import Login from './LogIn/index'
+import Dashboard from './Dashboard/index';
 
 class App extends Component {
 
@@ -9,7 +9,7 @@ class App extends Component {
     return (
       <div>
         {
-          this.props.login ? <TodoDashboard/> : <TodoLogin />
+          this.props.login ? <Dashboard/> : <Login />
         }
       </div>
     );

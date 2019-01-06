@@ -2,6 +2,8 @@ import React from "react";
 import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
+import { connect } from 'react-redux'
+import { setUserName, setPassword } from '../actions/index'
 
 const styles = theme => ({
   container: {
@@ -16,14 +18,6 @@ const styles = theme => ({
 });
 
 class Input extends React.Component {
-
-  // handleUserChange() {
-  //   this.props.handleChange({ userName: e.target.value });
-  // }
-
-  // handlePassChange() {
-  //   this.props.handleChange({ password: e.target.value });
-  // }
 
   render() {
     const { classes } = this.props;
@@ -55,4 +49,22 @@ Input.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Input);
+const mapStateToProps = state => {
+  return {
+      userName: state.userName,
+      password: state.password
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+      setUserName: userName => {
+          dispatch(setUserName(userName));
+      },
+      setPassword: password => {
+          dispatch(setPassword(password));
+      }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Input));

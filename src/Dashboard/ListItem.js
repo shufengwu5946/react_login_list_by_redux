@@ -9,6 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
+import { connect } from 'react-redux'
+import { deleteTodo} from '../actions/index'
 
 const styles = theme => ({
     root: {
@@ -27,12 +29,6 @@ const styles = theme => ({
 
 
 class TListItem extends React.Component {
-
-    // click(){
-        
-        
-    //     this.props.handleDelete(this.props.data.id);
-    // }
 
     render() {
         const { classes, data } = this.props;
@@ -64,4 +60,16 @@ TListItem.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TListItem);
+const mapStateToProps = state => {
+    return {}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteTodo: id => {
+            dispatch(deleteTodo(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TListItem));

@@ -3,6 +3,9 @@ import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
+import { connect } from 'react-redux'
+import {addTodo} from '../actions/index'
+
 
 const styles = theme => ({
     root: {
@@ -26,9 +29,6 @@ class AddInput extends React.Component {
         super(props);
         this.state = {name:""}
     }
-    // handleClick(){
-    //     this.props.handleAdd(this.state.name);
-    // }
 
     handlechange(e){
         this.setState({name:e.target.value});
@@ -63,4 +63,16 @@ AddInput.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(AddInput);
+const mapStateToProps = state => {
+    return {userId:state.userId}
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        addTodo: (text,userId) => {
+            dispatch(addTodo(text,userId));
+        }
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(AddInput));

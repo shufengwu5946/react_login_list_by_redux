@@ -2,7 +2,9 @@ import React from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from '@material-ui/core/List';
-import TodoListItem from '../containers/TodoListItem';
+import ListItem from './ListItem';
+import { connect } from 'react-redux'
+import { deleteTodo} from '../actions/index'
 
 const styles = theme => ({
     root: {
@@ -20,15 +22,6 @@ const styles = theme => ({
 
 class TodoList extends React.Component {
 
-    // constructor(props){
-    //     super(props);
-    //     this.handleDelete = this.handleDelete.bind(this);
-    // }
-    // handleDelete(id){
-        
-    //     this.props.handleDelete(id);
-    // }
-
     render() {
         const { classes} = this.props;
         return (
@@ -38,7 +31,7 @@ class TodoList extends React.Component {
                         this.props.todos.map((value => {
                             if (!value.completed) {
                                 return (
-                                    <TodoListItem key = {value.id} data = {value}/>
+                                    <ListItem key = {value.id} data = {value}/>
                                 )
                             }else{
                                 return null;
@@ -58,4 +51,18 @@ TodoList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TodoList);
+const mapStateToProps = state => {
+    return {
+        todos:state.todos
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        deleteTodo: id => {
+            dispatch(deleteTodo(id));
+        }
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TodoList));

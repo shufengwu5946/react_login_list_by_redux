@@ -5,7 +5,10 @@ import { withStyles } from "@material-ui/core/styles";
 import Icon from "./Icon";
 import LoginInfo from "./LoginInfo";
 import Button from "@material-ui/core/Button";
-import LoginInput from "../containers/LoginInput";
+import Input from "./Input";
+import { connect } from 'react-redux'
+import { login } from '../actions/index'
+
 const styles = theme => ({
   root: {
     position: "absolute",
@@ -31,34 +34,6 @@ const styles = theme => ({
 });
 
 class Login extends React.Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state = { loading:false,userName: "", password: "", error: "" };
-  //   this.handleChange = this.handleChange.bind(this);
-  // }
-
-  // handleClick() {
-  //   if ((!this.state.userName) && this.state.userName.length <= 0) {
-  //     alert("用户名不能为空");
-  //     return;
-  //   }
-  //   if ((!this.state.password) && this.state.password.length <= 0) {
-  //     alert("密码不能为空");
-  //     return;
-  //   }
-  //   this.setState({loading:true});
-  //   fetchLogin(this.state.userName, this.state.password).then(
-  //     value => {
-  //       this.setState({loading:false});
-  //       this.props.handleLoginChange({ login: true, userId: value.userId,userName:value.username });
-        
-  //     },
-  //     error => {
-  //       this.setState({ loading:false,error: (error.error?error.error:"Uh oh,some error happened!") });
-  //     }
-  //   );
-  // }
-
 
   render() {
     const { classes } = this.props;
@@ -67,7 +42,7 @@ class Login extends React.Component {
         <Paper className={classes.paper}>
           <Icon />
           <LoginInfo loginInfo={this.props.loginInfo} />
-          <LoginInput/>
+          <Input/>
           <Button
             variant="contained"
             color="primary"
@@ -86,4 +61,22 @@ Login.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(Login);
+
+
+const mapStateToProps = state => {
+    return {
+        loginInfo:state.loginInfo,
+        loading:state.loading
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        handleClick: () => {
+            dispatch(login());
+        }
+    }
+}
+
+// const LoginInput  = connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Login));
+export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Login));
