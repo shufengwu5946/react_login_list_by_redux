@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import {todos} from './todos'
-import {loginInfo,login,userName,userId,password,loading} from './log';
+import {loginInfo,login,userName,userId,password,loading,progress} from './log';
 
 const todoApp = combineReducers({
   todos,
@@ -9,7 +9,8 @@ const todoApp = combineReducers({
   userName,
   userId,
   password,
-  loading
+  loading,
+  progress
 })
 
 export default todoApp

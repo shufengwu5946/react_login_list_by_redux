@@ -29,7 +29,10 @@ export const todos = (state = [], action) => {
             return sDel;
         case 'LOAD_TODO':
             return [...action.todos];
+        case 'LOG_IN_SUCCESS':
+            return [];
         default:
             return state;
     }
 }
+

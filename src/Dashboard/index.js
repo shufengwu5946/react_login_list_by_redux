@@ -5,8 +5,9 @@ import { withStyles } from "@material-ui/core/styles";
 import AddInput from "./AddInput";
 import TitleBar from "./TitleBar";
 import TodoList from "./TodoList";
-import { connect } from 'react-redux'
-import { loadTodos} from '../actions/index'
+import { connect } from 'react-redux';
+import { loadTodos} from '../actions/index';
+import ProgressDialog from './ProgressDialog';
 
 const styles = {
     root: {
@@ -40,6 +41,8 @@ class Dashboard extends React.Component {
                 {this.props.todos &&
                     <TodoList />
                 }
+                
+                <ProgressDialog open = {this.props.progress}/>
             </div>
 
         );
@@ -52,7 +55,8 @@ Dashboard.propTypes = {
 
 const mapStateToProps = state => {
     return {
-        todos:state.todos
+        todos:state.todos,
+        progress:state.progress
     }
 }
 

@@ -74,3 +74,14 @@ export const loading = (state = false, action) => {
             return state;
     }
 }
+
+export const progress = (state = false, action) => {
+    switch (action.type) {
+        case 'LOG_IN_SUCCESS':
+            return true;
+        case 'LOAD_TODO':
+            return false;
+        default:
+            return state;
+    }
+}

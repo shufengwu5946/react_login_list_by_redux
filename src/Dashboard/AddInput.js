@@ -70,6 +70,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         addTodo: (text,userId) => {
+            if(!text){
+                alert("todo内容不能为空！");
+                return;
+            }
             dispatch(addTodo(text,userId));
         }
     }
