@@ -16,27 +16,25 @@ const styles = theme => ({
     width: 50,
     height: 50
   },
-  name:{
+  name: {
     marginLeft: "auto",
     marginRight: "auto",
-    textAlign:"center"
+    textAlign: "center"
   }
 });
 
-class Icon extends React.Component {
-  render() {
-    const { classes } = this.props;
-    return (
-      <div className={classes.root}>
-        <Avatar className={classes.avatar}>
-          <FolderIcon />
-        </Avatar>
-        <Typography className = {classes.name} variant="h5" gutterBottom>
-          Login
+function Icon(props) {
+  const { classes } = props;
+  return (
+    <div className={classes.root}>
+      <Avatar className={classes.avatar}>
+        <FolderIcon />
+      </Avatar>
+      <Typography className={classes.name} variant="h5" gutterBottom>
+        Login
         </Typography>
-      </div>
-    );
-  }
+    </div>
+  );
 }
 
 Icon.propTypes = {

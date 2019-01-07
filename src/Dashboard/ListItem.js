@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import ListItem from '@material-ui/core/ListItem';
@@ -9,8 +9,8 @@ import Avatar from '@material-ui/core/Avatar';
 import FolderIcon from '@material-ui/icons/Folder';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
-import { connect } from 'react-redux'
-import { deleteTodo} from '../actions/index'
+import { deleteTodo } from '../actions/index'
+import { TodoContext } from '../RootComponent';
 
 const styles = theme => ({
     root: {
@@ -28,48 +28,37 @@ const styles = theme => ({
 
 
 
-class TListItem extends React.Component {
+function TListItem(props) {
 
-    render() {
-        const { classes, data } = this.props;
-        return (
-            <div className={classes.root}>
-                <ListItem>
-                    <ListItemAvatar>
-                        <Avatar>
-                            <FolderIcon />
-                        </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText
-                        primary={data.title}
-                    />
-                    <ListItemSecondaryAction>
-                        <IconButton aria-label="Delete" onClick = {()=>this.props.deleteTodo(this.props.data.id)}>
-                            <DeleteIcon />
-                        </IconButton>
-                    </ListItemSecondaryAction>
-                </ListItem>
-                <hr />
-            </div>
+    const ctx = useContext(TodoContext);
 
-        )
-    }
+    const { classes, data } = props;
+    return (
+        <div className={classes.root}>
+            <ListItem>
+                <ListItemAvatar>
+                    <Avatar>
+                        <FolderIcon />
+                    </Avatar>
+                </ListItemAvatar>
+                <ListItemText
+                    primary={data.title}
+                />
+                <ListItemSecondaryAction>
+                    <IconButton aria-label="Delete" onClick={() => ctx.dispatch(deleteTodo(props.data.id))}>
+                        <DeleteIcon />
+                    </IconButton>
+                </ListItemSecondaryAction>
+            </ListItem>
+            <hr />
+        </div>
+
+    )
 }
 
 TListItem.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-    return {}
-}
 
-const mapDispatchToProps = dispatch => {
-    return {
-        deleteTodo: id => {
-            dispatch(deleteTodo(id));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TListItem));
+export default withStyles(styles)(TListItem);

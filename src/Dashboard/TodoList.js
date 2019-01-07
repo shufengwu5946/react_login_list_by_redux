@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import List from '@material-ui/core/List';
 import ListItem from './ListItem';
-import { connect } from 'react-redux'
-import { deleteTodo} from '../actions/index'
+import { TodoContext } from '../RootComponent';
 
 const styles = theme => ({
     root: {
@@ -20,49 +19,36 @@ const styles = theme => ({
     }
 });
 
-class TodoList extends React.Component {
+function TodoList(props) {
 
-    render() {
-        const { classes} = this.props;
-        return (
-            <div className={classes.demo}>
-                <List dense={false}>
-                    {
-                        this.props.todos.map((value => {
-                            if (!value.completed) {
-                                return (
-                                    <ListItem key = {value.id} data = {value}/>
-                                )
-                            }else{
-                                return null;
-                            }
+    const ctx = useContext(TodoContext);
 
-                        }))
-                    }
+    const { classes } = props;
+    return (
+        <div className={classes.demo}>
+            <List dense={false}>
+                {
+                    ctx.state.todos.map((value => {
+                        if (!value.completed) {
+                            return (
+                                <ListItem key={value.id} data={value} />
+                            )
+                        } else {
+                            return null;
+                        }
 
-                </List>
-            </div>
+                    }))
+                }
 
-        )
-    }
+            </List>
+        </div>
+
+    )
+
 }
 
 TodoList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-    return {
-        todos:state.todos
-    }
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        deleteTodo: id => {
-            dispatch(deleteTodo(id));
-        }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TodoList));
+export default withStyles(styles)(TodoList);

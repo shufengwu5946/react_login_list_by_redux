@@ -1,7 +1,3 @@
-import {
-    fetchLogin
-} from '../utils';
-import getList from '../other/get-list';
 
 // 增加todo列表项
 export const addTodo = (title, userId) => {
@@ -84,40 +80,6 @@ export const setLoginLoading = (loading) => {
     }
 }
 
-// 登录，异步操作，采用react-thunk
-export const login = () => {
-    return function (dispatch, getState) {
-        if ((!getState().userName) && getState().userName.length <= 0) {
-            alert("用户名不能为空");
-            return;
-        }
-        if ((!getState().password) && getState().password.length <= 0) {
-            alert("密码不能为空");
-            return;
-        }
-        dispatch(logInStart());
-        return fetchLogin(getState().userName, getState().password).then(
-            value => {
-                dispatch(logInSuccess(getState().userName, value.userId))
-            },
-            error => {
-                dispatch(logInFail(error.error ? error.error : "Uh oh,some error happened!"));
-            }
-        );
-    }
-}
-
-// 加载todo列表，异步操作，采用react-thunk
-export const loadTodos = () => {
-    return function (dispatch, getState) {
-        return getList(getState().userId, (data) => {
-            const todos = data;
-            dispatch(loadTodo(todos));
-        }, (error) => {
-            console.log('error')
-        });
-    }
-}
 
 
 

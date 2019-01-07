@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { useState, useContext } from 'react';
 import Button from '@material-ui/core/Button';
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import { connect } from 'react-redux'
-import {addTodo} from '../actions/index'
+import { addTodo } from '../actions/index'
+import { TodoContext } from '../RootComponent';
 
 
 const styles = theme => ({
     root: {
-        display:"flex",
-        flexDirection:"row",
-        alignItems:"center"
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center"
     },
     todoText: {
         width: 300,
@@ -23,60 +23,45 @@ const styles = theme => ({
     }
 });
 
-class AddInput extends React.Component {
+function AddInput(props) {
 
-    constructor(props){
-        super(props);
-        this.state = {name:""}
-    }
 
-    handlechange(e){
-        this.setState({name:e.target.value});
-    }
+    const [name, setName] = useState("");
 
-    render() {
-        const { classes,addTodo } = this.props;
-        return (
-            <div className={classes.root}>
-                <TextField
-                    id="standard-with-placeholder"
-                    label="Add todo"
-                    placeholder="Add todo"
-                    className={classes.todoText}
-                    margin="normal" 
-                    onChange = {(e)=>this.handlechange(e)}
-                    value = {this.state.name}/>
-                <Button
-                    variant="contained"
-                    color="primary"
-                    className={classes.button}
-                    onClick={() =>addTodo(this.state.name,this.props.userId)}>
-                    新增
+    const ctx = useContext(TodoContext);
+
+
+    const { classes} = props;
+    return (
+        <div className={classes.root}>
+            <TextField
+                id="standard-with-placeholder"
+                label="Add todo"
+                placeholder="Add todo"
+                className={classes.todoText}
+                margin="normal"
+                onChange={(e) => setName(e.target.value)}
+                value={name} />
+            <Button
+                variant="contained"
+                color="primary"
+                className={classes.button}
+                onClick={() => {
+                    if(!name){
+                        alert("todo名称不能为空！");
+                        return;
+                    }
+                    ctx.dispatch(addTodo(name, ctx.state.userId))
+                    }}>
+                新增
                 </Button>
-            </div>
+        </div>
 
-        )
-    }
+    )
 }
 
 AddInput.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-const mapStateToProps = state => {
-    return {userId:state.userId}
-}
-
-const mapDispatchToProps = dispatch => {
-    return {
-        addTodo: (text,userId) => {
-            if(!text){
-                alert("todo内容不能为空！");
-                return;
-            }
-            dispatch(addTodo(text,userId));
-        }
-    }
-}
-
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(AddInput));
+export default withStyles(styles)(AddInput);
