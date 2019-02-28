@@ -2,6 +2,7 @@ import {
     fetchLogin
 } from '../utils';
 import getList from '../other/get-list';
+import { push } from 'connected-react-router';
 
 // 增加todo列表项
 export const addTodo = (title, userId) => {
@@ -98,7 +99,8 @@ export const login = () => {
         dispatch(logInStart());
         return fetchLogin(getState().userName, getState().password).then(
             value => {
-                dispatch(logInSuccess(getState().userName, value.userId))
+                dispatch(logInSuccess(getState().userName, value.userId));
+                dispatch(push('/dashboard'));
             },
             error => {
                 dispatch(logInFail(error.error ? error.error : "Uh oh,some error happened!"));

@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux'
 import { logOutSuccess } from '../actions/index'
+import { replace } from 'connected-react-router'
 
 const styles = theme => ({
     root: {
@@ -45,7 +46,7 @@ TitleBar.propTypes = {
 const mapStateToProps = state => {
     return {
         loading: state.loading,
-        userName:state.userName
+        userName: state.userName
     }
 }
 
@@ -53,6 +54,7 @@ const mapDispatchToProps = dispatch => {
     return {
         logOutSuccess: () => {
             dispatch(logOutSuccess());
+            dispatch(replace('/'));
         }
     }
 }

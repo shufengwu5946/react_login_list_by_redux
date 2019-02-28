@@ -3,24 +3,25 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux';
-import { createStore,applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'; 
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk';
 import todoApp from './reducers/index';
-import App from './App';
-import { connect } from 'react-redux'
+import { createBrowserHistory } from 'history'
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { Route } from 'react-router-dom'
+import LogIn from './LogIn';
+import Dashboard from './Dashboard';
 
-let store = createStore(todoApp,applyMiddleware(thunk));
-
-const mapStateToProps = state => {
-    return {
-        login: state.login
-    }
-}
-
-const TodoApp = connect(mapStateToProps)(App);
+const history = createBrowserHistory();
+let store = createStore(todoApp(history), applyMiddleware(routerMiddleware(history), thunk));
 
 ReactDOM.render(<Provider store={store}>
-<TodoApp/>
+    <ConnectedRouter history={history}>
+        <div>
+            <Route exact path="/" component={LogIn} />
+            <Route path="/dashboard" component={Dashboard} />
+        </div>
+    </ConnectedRouter>
 </Provider>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
