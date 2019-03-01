@@ -1,9 +1,11 @@
-import { combineReducers } from 'redux'
-import { todos } from './todos'
-import { loginInfo, login, userName, userId, password, loading, progress } from './log';
+import { combineReducers } from 'redux';
 import { connectRouter } from 'connected-react-router';
+import todos from './todos';
+import {
+  loginInfo, login, userName, userId, password, loading, progress,
+} from './log';
 
-const todoApp = (history) => combineReducers({
+const todoApp = history => combineReducers({
   router: connectRouter(history),
   todos,
   loginInfo,
@@ -12,7 +14,7 @@ const todoApp = (history) => combineReducers({
   userId,
   password,
   loading,
-  progress
-})
+  progress,
+});
 
-export default todoApp
+export default todoApp;
