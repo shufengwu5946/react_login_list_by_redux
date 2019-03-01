@@ -1,68 +1,67 @@
 import React from 'react';
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
+import { connect } from 'react-redux';
 import ListItem from './ListItem';
-import { connect } from 'react-redux'
-import { deleteTodo} from '../actions/index'
+import { deleteTodo } from '../actions/index';
 
 const styles = theme => ({
-    root: {
-        flexGrow: 1,
-    },
-    todoText: {
-        width: 300,
-        marginLeft: 12
-    },
-    button: {
-        margin: theme.spacing.unit,
-        width: 100
-    }
+  root: {
+    flexGrow: 1,
+  },
+  todoText: {
+    width: 300,
+    marginLeft: 12,
+  },
+  button: {
+    margin: theme.spacing.unit,
+    width: 100,
+  },
 });
 
-class TodoList extends React.Component {
+const TodoList = (props) => {
+  const { classes, todos } = props;
+  return (
+    <div className={classes.demo}>
+      <List dense={false}>
+        {
+          todos.map(((value) => {
+            if (!value.completed) {
+              return (
+                <ListItem key={value.id} data={value} />
+              );
+            }
+            return null;
+          }))
+        }
 
-    render() {
-        const { classes} = this.props;
-        return (
-            <div className={classes.demo}>
-                <List dense={false}>
-                    {
-                        this.props.todos.map((value => {
-                            if (!value.completed) {
-                                return (
-                                    <ListItem key = {value.id} data = {value}/>
-                                )
-                            }else{
-                                return null;
-                            }
+      </List>
+    </div>
 
-                        }))
-                    }
-
-                </List>
-            </div>
-
-        )
-    }
-}
-
-TodoList.propTypes = {
-    classes: PropTypes.object.isRequired
+  );
 };
 
-const mapStateToProps = state => {
-    return {
-        todos:state.todos
-    }
-}
+TodoList.propTypes = {
+  classes: PropTypes.object.isRequired,
+  todos: PropTypes.arrayOf(
+    PropTypes.shape(
+      {
+        id: PropTypes.number.isRequired,
+        completed: PropTypes.bool.isRequired,
+      },
+    ).isRequired,
+  ).isRequired,
+};
 
-const mapDispatchToProps = dispatch => {
-    return {
-        deleteTodo: id => {
-            dispatch(deleteTodo(id));
-        }
-    }
-}
+const mapStateToProps = state => ({
+  todos: state.todos,
+});
+
+const mapDispatchToProps = dispatch => ({
+  deleteTodo: (id) => {
+    dispatch(deleteTodo(id));
+  },
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TodoList));

@@ -1,38 +1,14 @@
-import React from 'react';
-import { FormattedMessage, FormattedHTMLMessage } from 'react-intl';
+import getMsg from './utils';
 
-export const loginButtonTxt = (
-    <FormattedMessage
-        id="loginButton"
-        defaultMessage={'Login'}
-    />
-);
-
-export const userNameLabel = (
-    <FormattedMessage
-        defaultMessage="User Name*"
-        id="userName" />
-);
-export const passwordLabel = (
-    <FormattedMessage
-        defaultMessage="Password*"
-        id="password" />
-);
-
-export const loginIconTxt = (
-    <FormattedMessage
-        defaultMessage="Login"
-        id="loginIconTxt" />
-);
-
-export const titleTxt = (
-    <FormattedMessage
-        defaultMessage="Hello"
-        id="titleTxt" />
-);
-
-export const logOutTxt = (
-    <FormattedMessage
-        defaultMessage="Hello"
-        id="titleTxt" />
-); 
+export const loginButtonTxt = getMsg('loginButtonText', 'Login');
+export const userNameLabel = getMsg('userNameLabel', 'User Name*');
+export const passwordLabel = getMsg('passwordLabel', 'Password*');
+export const loginIconTxt = getMsg('loginIconTxt', 'Login');
+export const titleTxt = getMsg('titleTxt', 'Hello');
+export const logOutTxt = getMsg('logOutTxt', 'LogOut');
+export const addButtonTxt = getMsg('addButtonTxt', 'Add');
+export const logginInButtonTxt = getMsg('logginInButtonTxt', 'Logging in...');
+export const todoFormLabel = getMsg('todoFormLabel', 'Form');
+export const todoListLabel = getMsg('todoListLabel', 'List');
+export const addTodoLabel = getMsg('addTodoLabel', 'Add');
+export const loadingTxt = getMsg('loadingTxt', 'loading...');
