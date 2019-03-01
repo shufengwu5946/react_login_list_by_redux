@@ -4,6 +4,7 @@ import FolderIcon from "@material-ui/icons/Folder";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
+import { loginIconTxt } from "../i18n/message";
 
 const styles = theme => ({
   root: {
@@ -16,10 +17,10 @@ const styles = theme => ({
     width: 50,
     height: 50
   },
-  name:{
+  name: {
     marginLeft: "auto",
     marginRight: "auto",
-    textAlign:"center"
+    textAlign: "center"
   }
 });
 
@@ -31,8 +32,8 @@ class Icon extends React.Component {
         <Avatar className={classes.avatar}>
           <FolderIcon />
         </Avatar>
-        <Typography className = {classes.name} variant="h5" gutterBottom>
-          Login
+        <Typography className={classes.name} variant="h5" gutterBottom>
+          {loginIconTxt}
         </Typography>
       </div>
     );

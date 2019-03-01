@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux'
 import { logOutSuccess } from '../actions/index'
+import { titleTxt } from '../i18n/message';
 
 const styles = theme => ({
     root: {
@@ -29,32 +30,33 @@ class TitleBar extends React.Component {
             <AppBar position="static">
                 <Toolbar>
                     <Typography variant="h6" color="inherit" className={classes.grow}>
-                        {`Hello ${this.props.userName}`}
+                        {titleTxt}
+                        {` ${this.props.userName}`}
                     </Typography>
                     <Button color="inherit" onClick={() => this.props.logOutSuccess()} disabled={this.props.loading}>LogOut</Button>
                 </Toolbar>
             </AppBar>
-        )
-    }
-}
-
+                )
+            }
+        }
+        
 TitleBar.propTypes = {
-    classes: PropTypes.object.isRequired
-};
-
+                    classes: PropTypes.object.isRequired
+            };
+            
 const mapStateToProps = state => {
     return {
-        loading: state.loading,
-        userName:state.userName
-    }
-}
-
+                    loading: state.loading,
+                userName: state.userName
+            }
+        }
+        
 const mapDispatchToProps = dispatch => {
     return {
-        logOutSuccess: () => {
-            dispatch(logOutSuccess());
+                    logOutSuccess: () => {
+                    dispatch(logOutSuccess());
+                }
+            }
         }
-    }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TitleBar));
+        
+        export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(TitleBar));

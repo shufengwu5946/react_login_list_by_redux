@@ -8,6 +8,7 @@ import Button from "@material-ui/core/Button";
 import Input from "./Input";
 import { connect } from 'react-redux'
 import { login } from '../actions/index'
+import { loginButtonTxt } from "../i18n/message";
 
 const styles = theme => ({
   root: {
@@ -19,15 +20,15 @@ const styles = theme => ({
   button: {
     marginTop: theme.spacing.unit,
     marginBottom: theme.spacing.unit,
-    width:"50%"
+    width: "50%"
   },
   paper: {
-    paddingTop:10,
+    paddingTop: 10,
     marginTop: "10%",
     width: 400,
     marginLeft: "auto",
     marginRight: "auto",
-    display:"flex",
+    display: "flex",
     flexDirection: "column",
     alignItems: "center"
   }
@@ -37,19 +38,20 @@ class Login extends React.Component {
 
   render() {
     const { classes } = this.props;
+
     return (
       <div className={classes.root}>
         <Paper className={classes.paper}>
           <Icon />
           <LoginInfo loginInfo={this.props.loginInfo} />
-          <Input/>
+          <Input />
           <Button
             variant="contained"
             color="primary"
             className={classes.button}
-            onClick={()=>this.props.handleClick()}
-            disabled = {this.props.loading}>
-            {this.props.loading?"Loggin in...":"Login"}
+            onClick={() => this.props.handleClick()}
+            disabled={this.props.loading}>
+            {this.props.loading ? "Loggin in..." : loginButtonTxt}
           </Button>
         </Paper>
       </div>
@@ -64,19 +66,19 @@ Login.propTypes = {
 
 
 const mapStateToProps = state => {
-    return {
-        loginInfo:state.loginInfo,
-        loading:state.loading
-    }
+  return {
+    loginInfo: state.loginInfo,
+    loading: state.loading
+  }
 }
 
 const mapDispatchToProps = dispatch => {
-    return {
-        handleClick: () => {
-            dispatch(login());
-        }
+  return {
+    handleClick: () => {
+      dispatch(login());
     }
+  }
 }
 
 // const LoginInput  = connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Login));
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles)(Login));
+export default connect(mapStateToProps, mapDispatchToProps)(withStyles(styles)(Login));

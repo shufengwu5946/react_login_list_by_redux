@@ -3,7 +3,8 @@ import TextField from "@material-ui/core/TextField";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from 'react-redux'
-import { setUserName, setPassword } from '../actions/index'
+import { setUserName, setPassword } from '../actions/index';
+import { userNameLabel, passwordLabel } from "../i18n/message";
 
 const styles = theme => ({
   container: {
@@ -26,16 +27,16 @@ class Input extends React.Component {
 
         <TextField
           id="standard-with-placeholder"
-          label="User Name*"
+          label={userNameLabel}
           placeholder="User Name*"
           className={classes.textField}
           margin="normal"
           onChange={(e) => this.props.setUserName(e.target.value)} />
         <TextField
           id="standard-password-input"
-          label="Password*"
+          label={passwordLabel}
           className={classes.textField}
-          type="password*"
+          type="password"
           autoComplete="current-password"
           margin="normal"
           onChange={(e) => this.props.setPassword(e.target.value)}
@@ -51,19 +52,19 @@ Input.propTypes = {
 
 const mapStateToProps = state => {
   return {
-      userName: state.userName,
-      password: state.password
+    userName: state.userName,
+    password: state.password
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-      setUserName: userName => {
-          dispatch(setUserName(userName));
-      },
-      setPassword: password => {
-          dispatch(setPassword(password));
-      }
+    setUserName: userName => {
+      dispatch(setUserName(userName));
+    },
+    setPassword: password => {
+      dispatch(setPassword(password));
+    }
   }
 }
 
