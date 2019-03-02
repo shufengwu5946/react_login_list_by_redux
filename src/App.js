@@ -1,11 +1,10 @@
-import React, {  useContext } from 'react';
+import React, { useContext } from 'react';
 import './App.css';
-import Login from './LogIn/index'
+import Login from './LogIn/index';
 import Dashboard from './Dashboard/index';
 import { TodoContext } from './RootComponent';
 
 function App() {
-
   const ctx = useContext(TodoContext);
   return (
     <div>

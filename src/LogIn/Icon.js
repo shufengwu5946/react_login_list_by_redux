@@ -1,26 +1,26 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import FolderIcon from "@material-ui/icons/Folder";
-import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import Avatar from '@material-ui/core/Avatar';
+import FolderIcon from '@material-ui/icons/Folder';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
-    width: "100%"
+    width: '100%',
   },
   avatar: {
-    paddingTop: "10",
-    marginLeft: "auto",
-    marginRight: "auto",
+    paddingTop: '10',
+    marginLeft: 'auto',
+    marginRight: 'auto',
     width: 50,
-    height: 50
+    height: 50,
   },
   name: {
-    marginLeft: "auto",
-    marginRight: "auto",
-    textAlign: "center"
-  }
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    textAlign: 'center',
+  },
 });
 
 function Icon(props) {
@@ -32,13 +32,13 @@ function Icon(props) {
       </Avatar>
       <Typography className={classes.name} variant="h5" gutterBottom>
         Login
-        </Typography>
+      </Typography>
     </div>
   );
 }
 
 Icon.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 };
 
 export default withStyles(styles)(Icon);

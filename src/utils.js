@@ -8,22 +8,21 @@
  *  userId 用户的id，用于查询用户的 todos 列表
  */
 
-//
-export const fetchLogin = (userName, password) => {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (userName === "admin" && password === "admin") {
-        resolve({
-          type: "SUCCESS",
-          username: userName,
-          userId: 1
-        });
-      } else {
-        reject({
-          type: "FAIL",
-          error: "Uh oh, some error happened!"
-        });
-      }
-    }, 2000);
-  });
-};
+const fetchLogin = (userName, password) => new Promise((resolve, reject) => {
+  setTimeout(() => {
+    if (userName === 'admin' && password === 'admin') {
+      resolve({
+        type: 'SUCCESS',
+        username: userName,
+        userId: 1,
+      });
+    } else {
+      reject({
+        type: 'FAIL',
+        error: 'Uh oh, some error happened!',
+      });
+    }
+  }, 2000);
+});
+
+export default fetchLogin;
